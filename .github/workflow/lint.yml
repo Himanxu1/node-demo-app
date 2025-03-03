@@ -3,7 +3,7 @@ name: Lint Success on PR
 on:
   pull_request:
     branches:
-      - master
+      - '**'
 
 jobs:
   linting-job:
