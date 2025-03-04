@@ -21,10 +21,9 @@ jobs:
         run: |
           echo "$EC2_KEY" > private_key.pem
           chmod 400 private_key.pem
-          ssh -o StrictHostKeyChecking=no -i private_key.pem $EC2_USER@$EC2_HOST << 'EOF'
-            sudo su
+          ssh -t -o StrictHostKeyChecking=no -i private_key.pem $EC2_USER@$EC2_HOST << 'EOF'
             cd /home/myapp || exit 1
-            git pull origin master 
-            npm install 
-            pm2 restart myapp || pm2 start server.js --name myapp
+            sudo git pull origin master 
+            sudo npm install 
+            sudo pm2 restart myapp || pm2 start server.js --name myapp
           EOF
